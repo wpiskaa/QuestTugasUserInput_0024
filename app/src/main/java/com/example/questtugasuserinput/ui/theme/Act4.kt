@@ -113,3 +113,187 @@ fun EmailInputSection(
         )
     )
 }
+
+import android.app.DatePickerDialog
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import java.util.Calendar
+
+/**
+ * Section pairing Date of Birth and Experience inputs in a side-by-side Row.
+ */
+@Composable
+fun DateAndExperienceSection(
+    birthDate: String,
+    onBirthDateChange: (String) -> Unit,
+    experience: String,
+    onExperienceChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.field_row_gap))
+    ) {
+        DateOfBirthField(
+            birthDate = birthDate,
+            onBirthDateChange = onBirthDateChange,
+            modifier = Modifier.weight(1f)
+        )
+
+        ExperienceDropdownField(
+            experience = experience,
+            onExperienceChange = onExperienceChange,
+            modifier = Modifier.weight(1f)
+        )
+    }
+}
+
+/**
+ * Date of Birth picker field with calendar icon and DatePickerDialog.
+ */
+@Composable
+fun DateOfBirthField(
+    birthDate: String,
+    onBirthDateChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val context = LocalContext.current
+    val calendar = Calendar.getInstance()
+    val datePickerDialog = remember {
+        DatePickerDialog(
+            context,
+            { _, year, month, dayOfMonth ->
+                onBirthDateChange(
+                    String.format(
+                        java.util.Locale.getDefault(),
+                        "%02d/%02d/%04d",
+                        dayOfMonth,
+                        month + 1,
+                        year
+                    )
+                )
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+    }
+
+    Box(modifier = modifier) {
+        OutlinedTextField(
+            value = birthDate,
+            onValueChange = onBirthDateChange,
+            modifier = Modifier.fillMaxWidth(),
+            readOnly = true,
+            label = { Text(text = stringResource(id = R.string.birth_date_label)) },
+            singleLine = true,
+            trailingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_calendar),
+                    contentDescription = stringResource(id = R.string.desc_calendar_icon),
+                    modifier = Modifier
+                        .size(dimensionResource(id = R.dimen.icon_size_small))
+                        .clickable { datePickerDialog.show() },
+                    tint = colorResource(id = R.color.color_field_border)
+                )
+            },
+            shape = RoundedCornerShape(dimensionResource(id = R.dimen.field_corner_radius)),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = colorResource(id = R.color.color_field_focused_border),
+                unfocusedBorderColor = colorResource(id = R.color.color_field_unfocused_border),
+                focusedLabelColor = colorResource(id = R.color.color_field_focused_border),
+                unfocusedLabelColor = colorResource(id = R.color.color_subtitle_gray)
+            )
+        )
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .clickable { datePickerDialog.show() }
+        )
+    }
+}
+
+/**
+ * Dropdown selector for Experience levels.
+ */
+@Composable
+fun ExperienceDropdownField(
+    experience: String,
+    onExperienceChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var expanded by remember { mutableStateOf(false) }
+    val options = listOf(
+        stringResource(id = R.string.exp_beginner),
+        stringResource(id = R.string.exp_intermediate),
+        stringResource(id = R.string.exp_advanced),
+        stringResource(id = R.string.exp_expert)
+    )
+
+    Box(modifier = modifier) {
+        OutlinedTextField(
+            value = experience,
+            onValueChange = {},
+            modifier = Modifier.fillMaxWidth(),
+            readOnly = true,
+            label = { Text(text = stringResource(id = R.string.experience_label)) },
+            singleLine = true,
+            trailingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_arrow_drop_down),
+                    contentDescription = stringResource(id = R.string.desc_dropdown_icon),
+                    modifier = Modifier
+                        .size(dimensionResource(id = R.dimen.icon_size_small))
+                        .clickable { expanded = !expanded },
+                    tint = colorResource(id = R.color.color_field_border)
+                )
+            },
+            shape = RoundedCornerShape(dimensionResource(id = R.dimen.field_corner_radius)),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = colorResource(id = R.color.color_field_focused_border),
+                unfocusedBorderColor = colorResource(id = R.color.color_field_unfocused_border),
+                focusedLabelColor = colorResource(id = R.color.color_field_focused_border),
+                unfocusedLabelColor = colorResource(id = R.color.color_subtitle_gray)
+            )
+        )
+
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .clickable { expanded = !expanded }
+        )
+
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            modifier = Modifier.background(colorResource(id = R.color.color_card_floating_bg))
+        ) {
+            options.forEach { item ->
+                DropdownMenuItem(
+                    text = {
+                        Text(
+                            text = item,
+                            fontSize = dimensionResource(id = R.dimen.font_label).value.sp,
+                            color = colorResource(id = R.color.color_text_label)
+                        )
+                    },
+                    onClick = {
+                        onExperienceChange(item)
+                        expanded = false
+                    }
+                )
+            }
+        }
+    }
+}
