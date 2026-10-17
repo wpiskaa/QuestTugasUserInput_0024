@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -121,11 +122,12 @@ fun FormBiodataContent() {
             ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        var firstName by remember { mutableStateOf("") }
-        var lastName by remember { mutableStateOf("") }
-        var email by remember { mutableStateOf("") }
-        var birthDate by remember { mutableStateOf("") }
-        var experience by remember { mutableStateOf("") }
+        val emptyText = stringResource(id = R.string.empty_string)
+        var firstName by remember { mutableStateOf(emptyText) }
+        var lastName by remember { mutableStateOf(emptyText) }
+        var email by remember { mutableStateOf(emptyText) }
+        var birthDate by remember { mutableStateOf(emptyText) }
+        var experience by remember { mutableStateOf(emptyText) }
         var isAndroidSelected by remember { mutableStateOf(false) }
         var isUiUxSelected by remember { mutableStateOf(false) }
         var isWebSelected by remember { mutableStateOf(false) }
@@ -234,11 +236,12 @@ fun ResultSummaryCard(
     val webSkill = stringResource(id = R.string.skill_web)
     val noSkill = stringResource(id = R.string.result_none)
 
+    val commaSeparator = stringResource(id = R.string.comma_separator)
     val skillsList = buildList {
         if (formData.isAndroidSelected) add(androidSkill)
         if (formData.isUiUxSelected) add(uiuxSkill)
         if (formData.isWebSelected) add(webSkill)
-    }.ifEmpty { listOf(noSkill) }.joinToString(", ")
+    }.ifEmpty { listOf(noSkill) }.joinToString(commaSeparator)
 
     ElevatedCard(
         modifier = modifier.fillMaxWidth(),
@@ -271,7 +274,11 @@ fun ResultSummaryCard(
 
             ResultRow(
                 label = stringResource(id = R.string.result_name_label),
-                value = "${formData.firstName} ${formData.lastName}".trim()
+                value = stringResource(
+                    id = R.string.format_full_name,
+                    formData.firstName,
+                    formData.lastName
+                ).trim()
             )
             ResultRow(
                 label = stringResource(id = R.string.result_email_label),
@@ -517,6 +524,7 @@ fun DateOfBirthField(
 ) {
     val context = LocalContext.current
     val calendar = Calendar.getInstance()
+    val dateFormatPattern = stringResource(id = R.string.date_format_pattern)
     val datePickerDialog = remember {
         DatePickerDialog(
             context,
@@ -524,7 +532,7 @@ fun DateOfBirthField(
                 onBirthDateChange(
                     String.format(
                         java.util.Locale.getDefault(),
-                        "%02d/%02d/%04d",
+                        dateFormatPattern,
                         dayOfMonth,
                         month + 1,
                         year
@@ -684,3 +692,4 @@ fun FormBiodataPreview() {
         FormBiodataScreen()
     }
 }
+
