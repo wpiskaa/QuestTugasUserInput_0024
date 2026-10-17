@@ -7,4 +7,24 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Colors for Form Biodata Layout -->
+    <color name="color_primary_purple">#FF5C37A6</color>
+    <color name="color_primary_purple_dark">#FF3C1874</color>
+    <color name="color_subtitle_gray">#FF7B7F87</color>
+    <color name="color_scaffold_bg">#FFF0F2F5</color>
+    <color name="color_card_floating_bg">#FFFFFFFF</color>
+    <color name="color_text_title">#FF533483</color>
+    <color name="color_text_label">#FF1F1F24</color>
+    <color name="color_field_border">#FF666370</color>
+    <color name="color_field_focused_border">#FF5C37A6</color>
+    <color name="color_field_unfocused_border">#FF8F8E98</color>
+    <color name="color_btn_proceed_bg">#FFDADADA</color>
+    <color name="color_btn_proceed_active_bg">#FF5C37A6</color>
+    <color name="color_btn_proceed_text">#FFFFFFFF</color>
+    <color name="color_checkbox_checked">#FF5C37A6</color>
+    <color name="color_result_card_bg">#FFF6F2FF</color>
+    <color name="color_result_card_border">#FFD5C5F2</color>
+    <color name="color_result_accent">#FF4A238A</color>
+    <color name="color_divider">#FFE4E4E4</color>
 </resources>
