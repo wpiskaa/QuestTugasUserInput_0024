@@ -15,4 +15,44 @@
     <dimen name="space_12">12dp</dimen>
     <dimen name="space_14">14dp</dimen>
     <dimen name="space_16">16dp</dimen>
+    <dimen name="space_18">18dp</dimen>
+    <dimen name="space_20">20dp</dimen>
+    <dimen name="space_24">24dp</dimen>
+    <dimen name="space_28">28dp</dimen>
+    <dimen name="space_32">32dp</dimen>
+    <dimen name="space_40">40dp</dimen>
+
+    <!-- Header Wallpaper & Floating Box Layout -->
+    <dimen name="header_wallpaper_height">270dp</dimen>
+    <dimen name="floating_box_top_offset">210dp</dimen>
+    <dimen name="floating_card_corner_radius">34dp</dimen>
+    <dimen name="floating_card_elevation">16dp</dimen>
+    <dimen name="floating_card_padding_horizontal">22dp</dimen>
+    <dimen name="floating_card_padding_top">26dp</dimen>
+    <dimen name="floating_card_padding_bottom">36dp</dimen>
+
+    <!-- Input Fields -->
+    <dimen name="field_corner_radius">16dp</dimen>
+    <dimen name="field_border_width">1dp</dimen>
+    <dimen name="field_focused_border_width">2dp</dimen>
+    <dimen name="field_row_gap">10dp</dimen>
+    <dimen name="icon_size_small">22dp</dimen>
+
+    <!-- Buttons & Interactive Components -->
+    <dimen name="btn_proceed_height">52dp</dimen>
+    <dimen name="btn_proceed_corner_radius">26dp</dimen>
+    <dimen name="btn_proceed_elevation">2dp</dimen>
+    <dimen name="checkbox_item_spacing">2dp</dimen>
+    <dimen name="result_card_corner_radius">16dp</dimen>
+    <dimen name="result_card_padding">16dp</dimen>
+    <dimen name="result_card_elevation">6dp</dimen>
+
+    <!-- Font Sizes -->
+    <dimen name="font_title">25sp</dimen>
+    <dimen name="font_subtitle">13sp</dimen>
+    <dimen name="font_label">14sp</dimen>
+    <dimen name="font_checkbox">13sp</dimen>
+    <dimen name="font_button">16sp</dimen>
+    <dimen name="font_result_header">16sp</dimen>
+    <dimen name="font_result_body">13sp</dimen>
 </resources>
