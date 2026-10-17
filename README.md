@@ -83,6 +83,9 @@ Proyek aplikasi Android berbasis **Jetpack Compose** untuk penugasan mata kuliah
 
 ---
 
+<img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/47145a9e-88c2-49ac-9751-1128d6005b94" />
+
+
 ## 🛠️ Tech Stack
 - **Language:** Kotlin
 - **UI Toolkit:** Jetpack Compose (Material 3)
