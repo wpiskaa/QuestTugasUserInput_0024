@@ -382,3 +382,110 @@ fun SkillCheckboxItem(
         )
     }
 }
+
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.HorizontalDivider
+
+/**
+ * Summary card presenting the submitted biodata information.
+ */
+@Composable
+fun ResultSummaryCard(
+    formData: BiodataFormData,
+    modifier: Modifier = Modifier
+) {
+    val androidSkill = stringResource(id = R.string.skill_android)
+    val uiuxSkill = stringResource(id = R.string.skill_uiux)
+    val webSkill = stringResource(id = R.string.skill_web)
+    val noSkill = stringResource(id = R.string.result_none)
+
+    val skillsList = buildList {
+        if (formData.isAndroidSelected) add(androidSkill)
+        if (formData.isUiUxSelected) add(uiuxSkill)
+        if (formData.isWebSelected) add(webSkill)
+    }.ifEmpty { listOf(noSkill) }.joinToString(", ")
+
+    ElevatedCard(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.result_card_corner_radius)),
+        elevation = CardDefaults.elevatedCardElevation(
+            defaultElevation = dimensionResource(id = R.dimen.result_card_elevation)
+        ),
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = colorResource(id = R.color.color_result_card_bg)
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(id = R.dimen.result_card_padding))
+        ) {
+            Text(
+                text = stringResource(id = R.string.result_title),
+                fontSize = dimensionResource(id = R.dimen.font_result_header).value.sp,
+                fontWeight = FontWeight.Bold,
+                color = colorResource(id = R.color.color_result_accent)
+            )
+
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.space_10)))
+            HorizontalDivider(
+                thickness = dimensionResource(id = R.dimen.divider_tipis),
+                color = colorResource(id = R.color.color_result_card_border)
+            )
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.space_10)))
+
+            ResultRow(
+                label = stringResource(id = R.string.result_name_label),
+                value = "${formData.firstName} ${formData.lastName}".trim()
+            )
+            ResultRow(
+                label = stringResource(id = R.string.result_email_label),
+                value = formData.email
+            )
+            ResultRow(
+                label = stringResource(id = R.string.result_dob_label),
+                value = formData.birthDate
+            )
+            ResultRow(
+                label = stringResource(id = R.string.result_exp_label),
+                value = formData.experience
+            )
+            ResultRow(
+                label = stringResource(id = R.string.result_skills_label),
+                value = skillsList
+            )
+        }
+    }
+}
+
+/**
+ * Reusable key-value row inside ResultSummaryCard.
+ */
+@Composable
+fun ResultRow(
+    label: String,
+    value: String,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = dimensionResource(id = R.dimen.space_4)),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = label,
+            fontSize = dimensionResource(id = R.dimen.font_result_body).value.sp,
+            fontWeight = FontWeight.Medium,
+            color = colorResource(id = R.color.color_text_label)
+        )
+        Text(
+            text = value,
+            fontSize = dimensionResource(id = R.dimen.font_result_body).value.sp,
+            fontWeight = FontWeight.Normal,
+            color = colorResource(id = R.color.color_subtitle_gray)
+        )
+    }
+}
