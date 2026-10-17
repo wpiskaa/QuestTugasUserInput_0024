@@ -297,3 +297,88 @@ fun ExperienceDropdownField(
         }
     }
 }
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.ui.Alignment
+
+/**
+ * Skill selection section with checkboxes for Android, UI/UX, and Web.
+ */
+@Composable
+fun SkillSelectionSection(
+    isAndroidSelected: Boolean,
+    onAndroidChange: (Boolean) -> Unit,
+    isUiUxSelected: Boolean,
+    onUiUxChange: (Boolean) -> Unit,
+    isWebSelected: Boolean,
+    onWebChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.Start
+    ) {
+        Text(
+            text = stringResource(id = R.string.skill_section_title),
+            fontSize = dimensionResource(id = R.dimen.font_label).value.sp,
+            fontWeight = FontWeight.Bold,
+            color = colorResource(id = R.color.color_text_label)
+        )
+
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.space_6)))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            SkillCheckboxItem(
+                label = stringResource(id = R.string.skill_android),
+                checked = isAndroidSelected,
+                onCheckedChange = onAndroidChange
+            )
+            SkillCheckboxItem(
+                label = stringResource(id = R.string.skill_uiux),
+                checked = isUiUxSelected,
+                onCheckedChange = onUiUxChange
+            )
+            SkillCheckboxItem(
+                label = stringResource(id = R.string.skill_web),
+                checked = isWebSelected,
+                onCheckedChange = onWebChange
+            )
+        }
+    }
+}
+
+/**
+ * Single clickable checkbox item with label.
+ */
+@Composable
+fun SkillCheckboxItem(
+    label: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier.clickable { onCheckedChange(!checked) },
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Checkbox(
+            checked = checked,
+            onCheckedChange = onCheckedChange,
+            colors = CheckboxDefaults.colors(
+                checkedColor = colorResource(id = R.color.color_checkbox_checked),
+                uncheckedColor = colorResource(id = R.color.color_field_unfocused_border)
+            )
+        )
+        Text(
+            text = label,
+            fontSize = dimensionResource(id = R.dimen.font_checkbox).value.sp,
+            color = colorResource(id = R.color.color_text_label)
+        )
+    }
+}
