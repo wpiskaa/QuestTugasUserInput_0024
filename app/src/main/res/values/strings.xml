@@ -1,4 +1,32 @@
 <resources>
     <string name="app_name">QuestUserInput</string>
     <string name="submit">Submit</string>
+    <string name="header_wallpaper_desc">Header Wallpaper</string>
+    <string name="form_title">Form Biodata</string>
+    <string name="form_subtitle">Silahkan isi biodata Anda dibawah ini !!!</string>
+    <string name="first_name_label">Nama Depan</string>
+    <string name="last_name_label">Nama Belakang</string>
+    <string name="email_label">Email</string>
+    <string name="birth_date_label">Tgl Lahir</string>
+    <string name="experience_label">Experience</string>
+    <string name="skill_section_title">Pilih Skill Anda :</string>
+    <string name="skill_android">Android</string>
+    <string name="skill_uiux">UI/UX</string>
+    <string name="skill_web">Web</string>
+    <string name="btn_proceed">Proceed</string>
+    <string name="exp_beginner">Pemula (&lt; 1 Tahun)</string>
+    <string name="exp_intermediate">Menengah (1 - 3 Tahun)</string>
+    <string name="exp_advanced">Mahir (3 - 5 Tahun)</string>
+    <string name="exp_expert">Expert (&gt; 5 Tahun)</string>
+    <string name="desc_calendar_icon">Ikon Kalender Tanggal Lahir</string>
+    <string name="desc_dropdown_icon">Ikon Pilihan Pengalaman</string>
+    <string name="result_title">Ringkasan Biodata</string>
+    <string name="result_name_label">Nama Lengkap :</string>
+    <string name="result_email_label">Email :</string>
+    <string name="result_dob_label">Tgl Lahir :</string>
+    <string name="result_exp_label">Experience :</string>
+    <string name="result_skills_label">Skill Terpilih :</string>
+    <string name="result_none">Tidak ada skill yang dipilih</string>
+    <string name="btn_close">Tutup</string>
+    <string name="validation_error">Harap lengkapi semua field terlebih dahulu</string>
 </resources>
